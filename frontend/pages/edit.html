@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/edit.css">
+    <title>Card Example</title>
+</head>
+<body>
+    <div class="card">
+        <form id="frm" method="post" action="/submit">
+        <div class="card-image">
+            <img src="" alt="Main Image">
+        </div>
+        <div class="small-images" id="small-images">
+            <!-- <img src="" alt="Small Image 2">
+            <img src="" alt="Small Image 3"> -->
+        </div>
+        <textarea class="description" placeholder="Edit your description here..." id="description"></textarea>
+        <div class="button-container">
+            <button class="save-button">Save</button></form>
+            <button class="delete-button" onclick="del()">Delete</button>
+        </div>
+    </div>
+    <script src="../js/edit.js"></script>
+</body>
+</html>

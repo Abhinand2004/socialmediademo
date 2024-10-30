@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.imagecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    height: 200px; /* Optional: Set height for container */
+    width: 95%;
+}
+
+.imageDisplay img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover; /* Ensures the image maintains aspect ratio within the bounds */
+    border-radius: 4px;
+    margin: 5px; /* Add margin for spacing between images */
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}

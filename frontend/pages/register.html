@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/register.css"> <!-- Link to the external CSS -->
+    <title>Register Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <div class="image-display">
+            <img src="" alt="" id="img">
+        </div>
+        <form class="register-form" id="frm" method="post">
+            <div class="form-group">
+                <input type="file" id="pic" name="pic" onchange="picture()">
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="username" name="username" >
+                <label for="Phone">Phone</label>
+
+                <input type="text" id="phone" name="phone" >
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" >
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" >
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" name="confirm-password" >
+            </div>
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+
+    <script src="../js/register.js"></script>
+</body>
+</html>
