@@ -82,3 +82,6 @@ document.getElementById("icon-grid").innerHTML=str
 function home() {
   window.location.href=`../index.html`
 }
+
+
+..
