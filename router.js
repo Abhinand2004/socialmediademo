@@ -13,7 +13,7 @@ router.route('/delete/:id').delete(rh.dltusr)
 router.route('/details/:id').get(rh.editdata)
 router.route('/update/:id').put(rh.update)
 router.route('/deletepost/:id').delete(rh.delpost)
-
+router.route('/otp').post(rh.generateOTP)
 
 
 export default router;

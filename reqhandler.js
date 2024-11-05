@@ -2,18 +2,29 @@ import userSchema from "./models/model1.js"
 import postdata from "./models/postdata.js"
 import bcrypt from 'bcrypt'
 import pkg from 'jsonwebtoken'
+import nodemailer from 'nodemailer'
 const {sign}=pkg
 
 
+const transporter = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    secure: false, // true for port 465, false for other ports
+    auth: {
+      user: "e71fb0e2c6e46b",
+      pass: "1fbcf5faf14be5",
+    },
+  });
+
 export async function addUser(req,res) {
     // console.log(req.body);
-    const{username,email,pwd,cpwd,phone,pic}=req.body    
+    const{username,email,pwd,cpwd,phone,pic,otp}=req.body    
     if(!(username&&email&&pwd&&cpwd&&phone&&pic))
         return res.status(500).send({msg:"fields are empty"})
     if(pwd!=cpwd)
         return res.status(500).send({msg:"pass not match"})
     bcrypt.hash(pwd,10).then((hpwd)=>{        
-        userSchema.create({username,email,pass:hpwd,phone,pic})
+        userSchema.create({username,email,pass:hpwd,phone,pic,otp})
         res.status(201).send({msg:"Successfull"})
     }).catch((error)=>{
         console.log(error);
@@ -62,7 +73,7 @@ export async function getuserdata(req,res) {
 
 
 export async function addpost(req,res) {
-    console.log(req.body);
+    // console.log(req.body);
     const{...datas}=req.body    
     const user = await userSchema.findById(req.user.UserID);
         await postdata.create({id:req.user.UserID,...datas,usrname:user.username}).then(()=>{
@@ -92,7 +103,7 @@ export async function editdata(req,res) {
     // console.log(req.params);
     const {id}=req.params;
     const data=await postdata.findOne({_id:id})
-    console.log(data);
+    // console.log(data);
 
     res.status(200).send(data)
     
@@ -129,4 +140,33 @@ export async function delpost(req,res) {
         res.status(500).send({error})
     });
     
+}
+
+export async function generateOTP(req,res) {
+    const {email}=req.body
+    console.log(email);
+    if (!(email))  {
+        return res.status(500).send({msg:"fields are empty"})
+    }
+    
+    const user= await userSchema.findOne({email})        
+    
+    if (!user) {
+        return res.status(500).send({msg:"emial donot exist"})
+    }
+    const otp=Math.floor(Math.random()*10000)
+    console.log(otp);
+    
+
+    await userSchema.updateOne({email:email},{$set:{otp:otp}})
+    const info = await transporter.sendMail({
+        from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
+        to: email, // list of receivers
+        subject: "OTP", // Subject line
+        text: "VERIFY!", // plain text body
+        html: `<b>OTP IS ${otp}</b>`, // html body
+    })
+    console.log("Message sent: %s", info.messageId)
+    res.status(201).send({msg:"otp send"})
+
 }

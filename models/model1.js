@@ -5,6 +5,10 @@ const userSchema = new mongoose.Schema({
     pass: { type: String },
     pic:{ type: String},
     phone:{type:Number},
+    otp:{type:Number},
+  
+
+    
 });
 
 

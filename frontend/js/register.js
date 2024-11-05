@@ -8,7 +8,7 @@ document.getElementById('frm').addEventListener('submit',async function (e) {
     username=document.getElementById('username').value,
     email=document.getElementById('email').value,
     phone=document.getElementById('phone').value,
-
+    otp=null,
     pwd=document.getElementById('password').value,
     cpwd=document.getElementById('confirm-password').value,
 
@@ -20,7 +20,7 @@ document.getElementById('frm').addEventListener('submit',async function (e) {
     const res=await fetch('http://localhost:3008/api/addUser',{
         method:"POST",
         headers:{"content-Type":'application/json'},
-        body:JSON.stringify({username,email,pwd,cpwd,pic,phone})
+        body:JSON.stringify({username,email,pwd,cpwd,pic,phone,otp})
     })
     console.log(res);
     
