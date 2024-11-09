@@ -1,58 +1,123 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset some default styles */
+* {
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+/* General body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4; /* Light gray background for the body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+}
+
+/* Container for the form */
 .container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Prevent overflow */
 }
 
+/* Image container for file uploads */
 .imagecontainer {
     display: flex;
     flex-wrap: wrap;
+    gap: 15px; /* Spacing between images */
     margin-bottom: 20px;
-    border: 1px dashed #ccc;
-    padding: 10px;
-    height: 200px; /* Optional: Set height for container */
-    width: 95%;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
 }
 
+/* Image display styling */
 .imageDisplay img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover; /* Ensures the image maintains aspect ratio within the bounds */
-    border-radius: 4px;
-    margin: 5px; /* Add margin for spacing between images */
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.imageDisplay img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Hover shadow effect */
+}
+
+/* Input file field styling */
 input[type="file"] {
-    margin-bottom: 10px;
-}
-
-textarea {
-    width: 95%;
+    margin-bottom: 20px;
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+    width: 100%;
+    background-color: #fff;
+    font-size: 16px;
 }
 
-button {
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
+input[type="file"]:hover {
+    border-color: #28a745;
     cursor: pointer;
 }
 
+/* Textarea styling */
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: none;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+}
+
+textarea:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #28a745; /* Green button */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 button:hover {
-    background-color: #218838;
+    background-color: #218838; /* Darker green on hover */
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        width: 90%;
+    }
+
+    .imagecontainer {
+        flex-direction: column; /* Stack images vertically on small screens */
+    }
+
+    .imageDisplay img {
+        width: 100px;
+        height: 100px;
+    }
 }

@@ -1,74 +1,155 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff; /* Body background set to white */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    margin: 20px;
 }
 
+/* Card styling */
 .card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;  /* White background for the card */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     width: 400px;
     padding: 20px;
     text-align: center;
-}
-.card-image{
-    width: 100%;
-    height: 200px;
-}
-.card-image img {
-    width: 100%;
-    border-radius: 8px;
-    height: 200px;
-    border: 1px solid black;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.small-images {
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Card image area */
+.card-image {
+    position: relative;
     width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.card-image img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Small image previews */
+.small-images {
     display: flex;
-    flex-wrap: wrap;
-    height: 100px;
     justify-content: space-evenly;
-    margin: 10px 0;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .small-images img {
-    border-radius: 4px;
-    height: 100px;
-    width: 100px;
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.small-images img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Description textarea */
 .description {
     width: 100%;
-    height: 80px;
+    height: 100px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    margin: 10px 0;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    resize: none;
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: 'Arial', sans-serif;
 }
 
+/* Button container and buttons */
 .button-container {
     display: flex;
     justify-content: space-between;
 }
 
 button {
-    padding: 10px 15px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
+    width: 45%;
+    transition: background-color 0.3s ease;
 }
 
+/* Save button */
 .save-button {
-    background-color: #4CAF50;
+    background-color: #037a56;  /* Green theme */
     color: white;
 }
 
+.save-button:hover {
+    background-color: #026b4b;  /* Darker green on hover */
+}
+
+/* Delete button */
 .delete-button {
-    background-color: #f44336;
+    background-color: #d32f2f;  /* Red background */
     color: white;
+}
+
+.delete-button:hover {
+    background-color: #c62828;  /* Darker red on hover */
+}
+
+/* Add responsive behavior for smaller screens */
+@media (max-width: 600px) {
+    .card {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .description {
+        height: 80px;
+        font-size: 13px;
+    }
+
+    .small-images {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .small-images img {
+        width: 70px;
+        height: 70px;
+    }
+
+    button {
+        font-size: 14px;
+    }
 }

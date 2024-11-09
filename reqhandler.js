@@ -7,12 +7,13 @@ const {sign}=pkg
 
 
 const transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
-    secure: false, // true for port 465, false for other ports
+    service:"gmail",
+    // host: "sandbox.smtp.mailtrap.io",
+    // port: 2525,
+    // secure: false, // true for port 465, false for other ports
     auth: {
-      user: "e71fb0e2c6e46b",
-      pass: "1fbcf5faf14be5",
+      user: "abhinandc293@gmail.com",
+      pass: "xfrk uoxu ipfs lhjj",
     },
   });
 
@@ -151,22 +152,71 @@ export async function generateOTP(req,res) {
     
     const user= await userSchema.findOne({email})        
     
-    if (!user) {
+    if (user) {
+        const otp=Math.floor(Math.random()*10000)
+        console.log(otp);
+        await userSchema.updateOne({email:email},{$set:{otp:otp}})
+        const info = await transporter.sendMail({
+            from: 'abhinandc293@gmail.com', // sender address
+            to: email, // list of receivers
+            subject: "OTP", // Subject line
+            text: "VERIFY!", // plain text body
+            html: `<b>OTP IS ${otp}</b>`, // html body
+        })
+        console.log("Message sent: %s", info.messageId)
+        res.status(201).send({msg:"otp send"})
+        
+    }else{
         return res.status(500).send({msg:"emial donot exist"})
     }
-    const otp=Math.floor(Math.random()*10000)
-    console.log(otp);
+
+}
+
+
+
+export async function verifyotp(req,res) {
+    // console.log(req.body);
+    const{email,otp}=req.body    
+    if (!(otp )) 
+        return res.status(500).send({msg:"fields are empty"})
+      try{
+        const user = await userSchema.findOne({ email: email,otp:otp });
+        
+    if (!user) 
+        return res.status(500).send({msg:"otp didint match"})
+      
+        res.status(201).send({msg:"successs"})
+      }catch (error){
+        return res.status(500).send({msg:"there are some issues with your email"})
+        
+      }
+}
+
+
+
+
+
+
+export async function updatepass(req,res) {
     
+    const {pwd,cpwd,email}=req.body
+    if(pwd!=cpwd)
+        return res.status(500).send({msg:"pass not match"})
+    bcrypt.hash(pwd,10).then(async(hpwd)=>{        
+        await userSchema.updateOne({email:email},{$set:{pass:hpwd} })
+        
+        console.log("password updated");
+        
+        res.status(201).send({msg:"Successfull"})
 
-    await userSchema.updateOne({email:email},{$set:{otp:otp}})
-    const info = await transporter.sendMail({
-        from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
-        to: email, // list of receivers
-        subject: "OTP", // Subject line
-        text: "VERIFY!", // plain text body
-        html: `<b>OTP IS ${otp}</b>`, // html body
+        await userSchema.updateOne({email:email},{$set:{otp:null}})
+
+
+
+    }).catch((error)=>{
+        console.log(error);
     })
-    console.log("Message sent: %s", info.messageId)
-    res.status(201).send({msg:"otp send"})
-
+    
+    
+    
 }

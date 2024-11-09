@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Verification</title>
+  <link rel="stylesheet" href="../css/otpverify.css">
+</head>
+<body>
+
+  <div class="verification-container">
+    <h2>Email Verification</h2>
+    <p>Enter the 4-digit code sent to your email address:</p>
+<form id="frm" action="/submit" method="post"> 
+    <div>
+      <input type="text" id="digit1" class="code-input" maxlength="1" />
+      <input type="text" id="digit2" class="code-input" maxlength="1"  />
+      <input type="text" id="digit3" class="code-input" maxlength="1" />
+      <input type="text" id="digit4" class="code-input" maxlength="1" />
+    </div>
+
+    <button class="submit-btn" id="submitBtn"  >Submit</button>
+    </form>
+  </div>
+
+
+  <script src="../js/otpverify.js"></script>
+</body>
+</html>
